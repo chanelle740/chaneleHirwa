@@ -53,7 +53,7 @@ const GetToken = () => {
             <div className="w-full max-w-md pt-7">
               <form className="bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-4">
                 <div className="text-gray-800 text-2xl flex justify-center border-b-2 py-2 mb-4">
-                 Electricity token seller
+                 Welcome to Electricity token seller
                 </div>
                 <div className="mb-4">
                   <label
