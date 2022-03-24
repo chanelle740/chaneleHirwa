@@ -2,7 +2,6 @@ const request = require("supertest");
 const chai = require("chai");
 const http = require("chai-http");
 
-const { expect } = chai;
 
 const { Meter } = require("../../app/models/meter.model");
 const app = require("../../app");
@@ -41,14 +40,14 @@ describe("Meter endpoint", () => {
   test("GET /api/meters/324287 --> should return 200 on success", async () => {
     jest.spyOn(Meter, "findOne").mockReturnValue(Promise.resolve(data));
     const res = await chai.request(app).get("/api/meters/324287");
-    expect(res.status).to.equal(200);
+    expect(res.status).toBe(200);
     await mongoose.disconnect();
   });
 
   test("GET /api/meters/324267 --> should return 404", async () => {
     jest.spyOn(Meter, "findOne").mockReturnValue(Promise.resolve(undefined));
     const res = await chai.request(app).get("/api/meters/324267");
-    expect(res.status).to.equal(404);
+    expect(res.status).toBe(404);
   });
 
   test("POST /api/meters/loadToken --> should add 10 days of power", async () => {
@@ -61,16 +60,16 @@ describe("Meter endpoint", () => {
         token: "16b69b07-4c9a-436f-9af4-b6c1c97e2d65"
       });
   
-    expect(res.status).to.equal(200);
-    expect(res.body.message).to.equal(`10 days added, now you have 30 days remaining`);
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBe(`10 days added, now you have 30 days remaining`);
     await mongoose.disconnect();
   });
 
   test("GET /api/meters/324287/details --> should return You have 20 days remaining", async () => {
     jest.spyOn(Meter, "findOne").mockReturnValue(Promise.resolve(data));
     const res = await chai.request(app).get("/api/meters/324287/details");
-    expect(res.status).to.equal(200);
-    expect(res.body.message).to.equal("You have 20 days remaining");
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBe("You have 20 days remaining");
     await mongoose.disconnect();
   });
 
@@ -82,15 +81,15 @@ describe("Meter endpoint", () => {
       owner_last_name: "hirwa",
     });
 
-    expect(res.statusCode).to.equal(201);
+    expect(res.statusCode).toBe(201);
   });
 
   it("POST /api/meters --> should not create meter if owner_first_name is missing", async () => {
     const res = await request(app).post("/api/meters").send({
       owner_last_name: "Chan",
     });
-    expect(res.statusCode).to.equal(400);
-    expect(res.body.message).to.equal('"owner_first_name" is required');
+    expect(res.statusCode).toBe(400);
+    expect(res.body.message).toBe('"owner_first_name" is required');
   });
 
   test("PUT /api/meters/:number -->should return 201 if the meter is updated", async () => {
@@ -101,7 +100,7 @@ describe("Meter endpoint", () => {
       owner_first_name: "Channy",
       owner_last_name: "hirwa",
     });
-    expect(res.body.message).to.equal("Meter was updated successfully.");
+    expect(res.body.message).toBe("Meter was updated successfully.");
   });
 
   test("PUT /api/meters/:number --> should return 404 if no data was given", async () => {
@@ -112,7 +111,7 @@ describe("Meter endpoint", () => {
       owner_first_name: "chanelle",
       owner_last_name: "hirwa",
     });
-    expect(res.body.message).to.equal("Not Found");
+    expect(res.body.message).toBe("Not Found");
   });
 
   it("DELETE /api/meters/:number -->should delete one meter successfully", async () => {
@@ -121,8 +120,8 @@ describe("Meter endpoint", () => {
       .mockReturnValue(Promise.resolve(true));
 
     const response = await request(app).delete("/api/meters/324287");
-    expect(response.statusCode).to.equal(200);
-    expect(response.body.message).to.equal("Meter was deleted successfully!");
+    expect(response.statusCode).toBe(200);
+    expect(response.body.message).toBe("Meter was deleted successfully!");
   });
 
   it("DELETE /api/meters/:number -->should not delete meter if id is not found", async () => {
@@ -131,8 +130,8 @@ describe("Meter endpoint", () => {
       .mockReturnValue(Promise.resolve(null));
 
     const response = await request(app).delete("/api/meters/320287");
-    expect(response.statusCode).to.equal(404);
-    expect(response.body.message).to.equal(
+    expect(response.statusCode).toBe(404);
+    expect(response.body.message).toBe(
       `Could not delete Meter with number=320287`
     );
   });
