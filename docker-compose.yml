@@ -20,6 +20,9 @@ services:
     ports:
       - '4000:4000'
   db:
+    image: 2100444/db-image:latest
+    stdin_open: true
+    tty: true 
     build:
        context: .
        dockerfile: db.Dockerfile
