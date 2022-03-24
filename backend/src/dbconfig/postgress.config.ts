@@ -9,7 +9,7 @@ import { join } from 'path';
 export const pgConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   host: 'localhost',
-  port: 5432,
+  port: 5832,
   username: 'chanelle',
   password: 'chanelle',
   database: 'electricity_token',

@@ -9,7 +9,7 @@ services:
       context: client
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '80:3000'
   backend:
     image: 2100444/backend-image:latest
     stdin_open: true
@@ -24,7 +24,7 @@ services:
        context: .
        dockerfile: db.Dockerfile
     ports:
-      - '5432:5432'
+      - '5832:5832'
     volumes:
       - db:/var/lib/postgresql/data
 volumes:
