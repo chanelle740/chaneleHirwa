@@ -1,0 +1,65 @@
+version: '3.8'
+
+services: 
+  frontend:
+    image: 2100444/frontend-image:latest
+    stdin_open: true 
+    tty: true 
+    build: 
+      context: client
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+  backend:
+    image: 2100444/backend-image:latest
+    stdin_open: true
+    tty: true 
+    build: 
+      context: backend
+      dockerfile: Dockerfile
+    ports:
+      - '4000:4000'
+  db:
+    build:
+       context: .
+       dockerfile: db.Dockerfile
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+
+
+# version: '3.8'
+
+# services: 
+#   backend:
+#     build: 
+#       context: backend
+#       dockerfile: Dockerfile
+     
+#     ports:
+#       - '4000:4000'
+#   frontend:
+#     build: 
+#       context: client
+#       dockerfile: Dockerfile
+#     ports:
+#       - '3000:3000'
+#   dbImage:
+#     build: 
+#       dockerfile: db.Dockerfile
+#   db:
+#     image: postgres:14.1-alpine
+#     restart: always
+#     environment:
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_DB=postgres
+#       - POSTGRES_PASSWORD=postgres
+#     ports:
+#       - '5432:5432'
+#     volumes:
+#       - db:/var/lib/postgresql/data
+# volumes:
+#   db:
