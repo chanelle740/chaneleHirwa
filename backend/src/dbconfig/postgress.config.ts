@@ -2,6 +2,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { join } from 'path';
 
 // entities: ['/src/modules/**/entities/*.entity.ts'],
+
 // import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 // import { join } from 'path';
 
@@ -9,7 +10,7 @@ import { join } from 'path';
 export const pgConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   host: 'localhost',
-  port: 5832,
+  port: 5432,
   username: 'chanelle',
   password: 'chanelle',
   database: 'electricity_token',
